@@ -3,10 +3,10 @@ package com.example.events.service;
 import com.example.events.dto.StatsResponse;
 import com.example.events.repository.MachineEventRepository;
 import org.springframework.stereotype.Service;
-
+import java.util.List;
 import java.time.Duration;
 import java.time.Instant;
-
+import com.example.events.dto.LineDefectStats;
 @Service
 public class StatsService {
 
@@ -15,6 +15,19 @@ public class StatsService {
     public StatsService(MachineEventRepository repository) {
         this.repository = repository;
     }
+    
+    public List<LineDefectStats> topDefectLines(
+            Instant start,
+            Instant end,
+            int limit
+    ) {
+        return repository.findTopDefectLines(start, end)
+                .stream()
+                .limit(limit)
+                .toList();
+    }
+
+
 
     public StatsResponse getStats(String machineId, Instant start, Instant end) {
 

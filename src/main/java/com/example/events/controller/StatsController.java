@@ -2,10 +2,11 @@ package com.example.events.controller;
 
 import com.example.events.dto.StatsResponse;
 import com.example.events.service.StatsService;
-
+import java.util.List;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import com.example.events.dto.LineDefectStats;
 
 import java.time.Instant;
 
@@ -29,4 +30,14 @@ public class StatsController {
                 statsService.getStats(machineId, start, end)
         );
     }
+    @GetMapping("/stats/top-defect-lines")
+    public List<LineDefectStats> topDefectLines(
+            @RequestParam Instant start,
+            @RequestParam Instant end,
+            @RequestParam(defaultValue = "3") int limit
+    ) {
+        return statsService.topDefectLines(start, end, limit);
+    }
+
+    
 }

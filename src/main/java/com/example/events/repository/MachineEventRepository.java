@@ -3,7 +3,7 @@ package com.example.events.repository;
 import com.example.events.models.MachineEvent;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.data.repository.query.Param;
-
+import com.example.events.dto.LineDefectStats;
 import jakarta.persistence.LockModeType;
 import java.time.Instant;
 import java.util.List;
@@ -27,7 +27,20 @@ public interface MachineEventRepository extends JpaRepository<MachineEvent, Stri
             Instant end
     );
     
-    
+    @Query("""
+            SELECT new com.example.events.dto.LineDefectStats(
+                e.lineId,
+                SUM(e.defectCount)
+            )
+            FROM MachineEvent e
+            WHERE e.eventTime BETWEEN :start AND :end
+            GROUP BY e.lineId
+            ORDER BY SUM(e.defectCount) DESC
+        """)
+        List<LineDefectStats> findTopDefectLines(
+                Instant start,
+                Instant end
+        );
     
     @Query("""
     	    SELECT COALESCE(SUM(e.defectCount), 0)
