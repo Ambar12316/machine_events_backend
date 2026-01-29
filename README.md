@@ -2,7 +2,7 @@
 
 ## Tech Stack
 - Java 17
-- Spring Boot
+- Spring Boot(STS 4.3.0)
 - H2 (in-memory)
 - JPA
 
