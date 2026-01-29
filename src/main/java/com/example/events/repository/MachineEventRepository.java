@@ -26,6 +26,9 @@ public interface MachineEventRepository extends JpaRepository<MachineEvent, Stri
             Instant start,
             Instant end
     );
+    
+    
+    
     @Query("""
     	    SELECT COALESCE(SUM(e.defectCount), 0)
     	    FROM MachineEvent e
