@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import com.example.events.dto.LineDefectStats;
 
 import java.time.Instant;
-
+@CrossOrigin(origins ="http://localhost:5173")
 @RestController
 @RequestMapping("/stats")
 public class StatsController {
