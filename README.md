@@ -35,6 +35,6 @@ src/main/java/com/example/events\
     EventRequest.java\
     BatchIngestResult.java\
     LineDefectStats.java\
-    StatsResponse.java\
+    StatsResponse.java
 
-  MachineEventsApplication.java\
+  MachineEventsApplication.java
